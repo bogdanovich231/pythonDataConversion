@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pyinstaller": "^0.0.1",
+    "pyyaml": "^0.0.1"
+  }
+}
