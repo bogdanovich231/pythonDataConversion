@@ -1,0 +1,32 @@
+name: Build and Upload Artifact
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+         python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install jsonlib
+          pip install xmltodict
+          pip install pyyaml
+
+      - name: Build executable
+        run: pyinstaller --onefile --noconsole main.py
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: program
+          path: dist/main.exe
