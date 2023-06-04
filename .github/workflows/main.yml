@@ -18,6 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install pyinstaller
           pip install jsonlib
           pip install xmltodict
           pip install pyyaml
