@@ -55,4 +55,27 @@ def xml_to_dict(element):
     return result
 
 
+def dict_to_xml(data):
+    root = None
+    if isinstance(data, dict):
+        root = ET.Element('root')
+        for key, value in data.items():
+            child = dict_to_xml(value)
+            child.tag = key
+            root.append(child)
+    else:
+        root = ET.Element('item')
+        root.text = str(data)
+    return root
 
+
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("Использование: program.exe pathFile1.x pathFile2.y")
+        print("где x и y - один из форматов .xml, .json и .yml (.yaml).")
+        sys.exit(1)
+
+    inputFile = sys.argv[1]
+    outputFile = sys.argv[2]
+
+    convertFile(inputFile, outputFile)
