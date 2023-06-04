@@ -39,4 +39,20 @@ def convertFile(inputFile, outputFile):
     print("The data conversion is complete.")
 
 
+def xml_to_dict(element):
+    if len(element) == 0:
+        return element.text
+    result = {}
+    for child in element:
+        child_data = xml_to_dict(child)
+        if child.tag in result:
+            if type(result[child.tag]) is list:
+                result[child.tag].append(child_data)
+            else:
+                result[child.tag] = [result[child.tag], child_data]
+        else:
+            result[child.tag] = child_data
+    return result
+
+
 
