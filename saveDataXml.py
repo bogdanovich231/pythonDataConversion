@@ -12,7 +12,7 @@ def convertFile(inputFile, outputFile):
         with open(inputFile, 'r') as yamlFile:
             data = yaml.safe_load(yamlFile)
     else:
-        print("Unsupported file format.")
+        QMessageBox.critical(None, "Unsupported file format", "Unsupported file format.")
         return
 
     _, outputExtension = os.path.splitext(outputFile)
@@ -28,10 +28,11 @@ def convertFile(inputFile, outputFile):
         with open(outputFile, 'w') as yamlOutput:
             yaml.dump(data, yamlOutput, default_flow_style=False)
     else:
-        print("Unsupported output file format.")
+        QMessageBox.critical(None, "Unsupported output file format", "Unsupported output file format.")
         return
 
-    print("The data conversion is complete.")
+    QMessageBox.information(None, "Data conversion complete", "The data conversion is complete.")
+
 
 # Task 7: save data from an object to a file in the format and according to .xml syntax.
     # if outputExtension == '.xml':
