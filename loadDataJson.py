@@ -12,7 +12,7 @@ def convertFile(inputFile, outputFile):
         with open(inputFile, 'r') as yamlFile:
             data = yaml.safe_load(yamlFile)
     else:
-        print("Unsupported file format.")
+        QMessageBox.critical(None, "Unsupported file format", "Unsupported file format.")
         return
 
     _, outputExtension = os.path.splitext(outputFile)
@@ -28,7 +28,27 @@ def convertFile(inputFile, outputFile):
         with open(outputFile, 'w') as yamlOutput:
             yaml.dump(data, yamlOutput, default_flow_style=False)
     else:
-        print("Unsupported output file format.")
+        QMessageBox.critical(None, "Unsupported output file format", "Unsupported output file format.")
         return
 
-    print("The data conversion is complete.")
+    QMessageBox.information(None, "Data conversion complete", "The data conversion is complete.")
+
+def xml_to_dict(element):
+    if len(element) == 0:
+        return element.text
+    result = {}
+    for child in element:
+        child_data = xml_to_dict(child)
+        if child.tag in result:
+            if type(result[child.tag]) is list:
+                result[child.tag].append(child_data)
+            else:
+                result[child.tag] = [result[child.tag], child_data]
+        else:
+            result[child.tag] = child_data
+    return result
+
+# loading data from a .json file into the object and checking that the file syntax is correct.
+    # elif extension == '.json':
+    #     with open(inputFile, 'r') as jsonFile:
+    #         data = json.load(jsonFile)
