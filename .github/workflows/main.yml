@@ -27,6 +27,7 @@ jobs:
           pip install jsonlib
           pip install xmltodict
           pip install pyyaml
+          pip install PyQt5 asyncio
 
       - name: Build executable
         run: pyinstaller --onefile --noconsole main.py
