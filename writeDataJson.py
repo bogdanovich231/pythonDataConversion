@@ -5,9 +5,9 @@ def convertFile(inputFile, outputFile):
         tree = ET.parse(inputFile)
         root = tree.getroot()
         data = xml_to_dict(root)
-    # elif extension == '.json':
-    #     with open(inputFile, 'r') as jsonFile:
-    #         data = json.load(jsonFile)
+    elif extension == '.json':
+        with open(inputFile, 'r') as jsonFile:
+            data = json.load(jsonFile)
     elif extension == '.yml' or extension == '.yaml':
         with open(inputFile, 'r') as yamlFile:
             data = yaml.safe_load(yamlFile)
@@ -32,6 +32,7 @@ def convertFile(inputFile, outputFile):
         return
 
     QMessageBox.information(None, "Data conversion complete", "The data conversion is complete.")
+
 
 
 
